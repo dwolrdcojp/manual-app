@@ -3,17 +3,19 @@ import Link from 'next/link';
 const url = process.env.NEXT_PUBLIC_VERCEL_URL + '/api/posts';
 
 async function getPosts() {
-				const resp = await fetch('/api/posts', { cache: 'no-store' });
 
-				// Recommendation: handle errors
-				if (!resp.ok) {
-								// This will activate the closest `error.js` Error Boundary
-								throw new Error('Failed to fetch data');
+				try {
+
+								const resp = await fetch(`https://${url}`, { cache: 'no-store' });
+								const data = resp.json();
+
+								return data;
+
+				} catch (err) {
+
+								console.log(err);
 				}
-
-				const data = resp.json();
-
-				return data;
+				
 }
 
 export default async function Page() {
