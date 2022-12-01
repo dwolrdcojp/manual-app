@@ -1,18 +1,19 @@
 import Link from 'next/link';
 
-const url = 'https://manual-j0tspeegz-dwolrdcojp.vercel.app/api/posts';
+const url = process.env.NEXT_PUBLIC_VERCEL_URL + '/api/posts';
 
 async function getPosts() {
-				try {
-								
-								const resp = await fetch(url, { cache: 'no-store' });
-								const data = resp.json();
+				const resp = await fetch(url, { cache: 'no-store' });
 
-								return data;
+				// Recommendation: handle errors
+				if (!resp.ok) {
+								// This will activate the closest `error.js` Error Boundary
+								throw new Error('Failed to fetch data');
 				}
-				catch (error) {
-								console.log(error);
-				}
+
+				const data = resp.json();
+
+				return data;
 }
 
 export default async function Page() {
