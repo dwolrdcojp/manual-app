@@ -4,18 +4,10 @@ const url = process.env.NEXT_PUBLIC_VERCEL_URL + '/api/posts';
 
 async function getPosts() {
 
-				try {
+				const resp = await fetch(url, { cache: 'no-store' });
+				const data = resp.json();
 
-								const resp = await fetch(`https://${url}`, { cache: 'no-store' });
-								const data = resp.json();
-
-								return data;
-
-				} catch (err) {
-
-								console.log(err);
-				}
-				
+				return data;
 }
 
 export default async function Page() {
