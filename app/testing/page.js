@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
+const url = 'https://manual-j0tspeegz-dwolrdcojp.vercel.app/api/posts';
 
 async function getPosts() {
-	const resp = await fetch('https://manual-j0tspeegz-dwolrdcojp.vercel.app/api/posts', { cache: 'no-store' });
+	const resp = await fetch(url, { cache: 'no-store' });
 	const data = resp.json();
 
 				return data;
