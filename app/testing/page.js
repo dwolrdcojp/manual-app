@@ -3,15 +3,20 @@ import Link from 'next/link';
 const url = 'https://manual-j0tspeegz-dwolrdcojp.vercel.app/api/posts';
 
 async function getPosts() {
-	const resp = await fetch(url, { cache: 'no-store' });
-	const data = resp.json();
+				try {
+								
+								const resp = await fetch(url, { cache: 'no-store' });
+								const data = resp.json();
 
-				return data;
+								return data;
+				}
+				catch (error) {
+								console.log(error);
+				}
 }
 
 export default async function Page() {
 		const posts = await getPosts();
-		console.log(posts);
 
   return ( <div>
       <h1>Testing API Routes</h1>
